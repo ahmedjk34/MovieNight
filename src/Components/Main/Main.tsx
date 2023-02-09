@@ -25,7 +25,7 @@ const Main = (props: Props) => {
         src={currentImg}
         crossOrigin="anonymous"
         onLoad={(e) => {
-          getImageColor(e.target);
+          getImageColor(e.target as HTMLImageElement);
         }}
       ></img>
       <h2>
@@ -34,7 +34,7 @@ const Main = (props: Props) => {
       <div className="latestMovies">
         <div className="newMovie">
           <img
-            onMouseEnter={(e) => getImageColor(e.target)}
+            onMouseEnter={(e) => getImageColor(e.target as HTMLImageElement)}
             src="https://image.tmdb.org/t/p/w500/fygeMr16EcxJiYhdiO1LEr7iHtI.jpg"
           ></img>
         </div>

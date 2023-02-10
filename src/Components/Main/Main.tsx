@@ -1,46 +1,71 @@
-import React, { useRef } from "react";
-import { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Overlay from "./Overlay";
+import { fetchPopular } from "../../API";
+import { Movie } from "../../Types/Types";
+import PopularMovie from "./PopularMovie";
 
-type Props = {};
-
-const Main = (props: Props) => {
-  const [currentImg, setCurrentImg] = useState(
-    "https://image.tmdb.org/t/p/w500/fygeMr16EcxJiYhdiO1LEr7iHtI.jpg"
-  );
-  const imgRef = useRef<HTMLImageElement | null>(null);
+const Main = () => {
+  const popularMovies = useRef<Movie[] | null>(null);
+  useEffect(() => {
+    (async function fetchData() {
+      const popularMoviesResponse = await fetchPopular();
+      popularMovies.current = popularMoviesResponse.results;
+      setPageLoaded(true);
+    })();
+  }, []);
+  const [currentImg, setCurrentImg] = useState<HTMLImageElement | null>(null);
+  const [imgColor, setImgColor] = useState<number[]>([0, 0, 0]);
+  const [pageLoaded, setPageLoaded] = useState<boolean>(false);
   //@ts-ignore
   const colorThief = new ColorThief();
-  let imgColor: number[] = [0, 0, 0];
   function getImageColor(img: HTMLImageElement) {
-    imgColor = colorThief.getColor(img);
-    console.log(imgColor);
+    if (img && img.complete) {
+      img.crossOrigin = "Anonymous";
+      setImgColor(colorThief.getColor(img));
+    }
   }
-  return (
+
+  return pageLoaded ? (
     <div className="main">
-      <Overlay imgColor={imgColor}></Overlay>
-      <img
-        ref={imgRef}
-        className="mainBackground"
-        src={currentImg}
-        crossOrigin="anonymous"
-        onLoad={(e) => {
-          getImageColor(e.target as HTMLImageElement);
-        }}
-      ></img>
+      <Overlay imgColor={imgColor} currentImg={currentImg}></Overlay>
+
       <h2>
         Welcome back , <em>Ahmed</em>. Check the latest movies.
       </h2>
       <div className="latestMovies">
-        <div className="newMovie">
-          <img
-            onMouseEnter={(e) => getImageColor(e.target as HTMLImageElement)}
-            src="https://image.tmdb.org/t/p/w500/fygeMr16EcxJiYhdiO1LEr7iHtI.jpg"
-          ></img>
-        </div>
+        {popularMovies.current?.slice(0, 4).map((movieData) => (
+          <PopularMovie
+            movieData={movieData}
+            setCurrentImg={setCurrentImg}
+            getImageColor={getImageColor}
+          ></PopularMovie>
+        ))}
       </div>
     </div>
+  ) : (
+    "loading...."
   );
 };
 
 export default Main;
+
+{
+  /* <div className="newMovie">
+          <img
+            onMouseEnter={(e) => {
+              setCurrentImg(e.target);
+              getImageColor(e.target);
+            }}
+            src="https://image.tmdb.org/t/p/w500/fygeMr16EcxJiYhdiO1LEr7iHtI.jpg"
+          ></img>
+        </div>
+        <div className="newMovie">
+          <img
+            onMouseEnter={(e) => {
+              setCurrentImg(e.target);
+              getImageColor(e.target);
+            }}
+            src="https://image.tmdb.org/t/p/w780/oodPJ3Op1pWBhnEFyw5fampRCWf.jpg"
+          ></img>
+        </div> */
+}

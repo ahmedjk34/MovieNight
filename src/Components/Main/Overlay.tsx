@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 type Props = {
   imgColor: number[] | null;
+  currentImg: HTMLImageElement | null;
 };
 
-function Overlay({ imgColor }: Props) {
+function Overlay({ imgColor, currentImg }: Props) {
   //@ts-ignore
   const [red, green, blue] = imgColor;
-
   return (
-    <div
-      className="mainOverlay"
-      style={{ backgroundColor: `rgb(${red},${green},${blue})` }}
-    ></div>
+    <>
+      <img
+        className="mainBackground"
+        src={currentImg?.src}
+        crossOrigin="anonymous"
+      ></img>
+      <div
+        className="mainOverlay"
+        style={{ backgroundColor: `rgb(${red},${green},${blue})` }}
+      ></div>
+    </>
   );
 }
 

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 type Props = {
   imgColor: number[] | null;
-  currentImg: HTMLImageElement | null;
+  currentImg: string;
 };
 
 function Overlay({ imgColor, currentImg }: Props) {
@@ -12,7 +12,7 @@ function Overlay({ imgColor, currentImg }: Props) {
     <>
       <img
         className="mainBackground"
-        src={currentImg?.src}
+        src={currentImg}
         crossOrigin="anonymous"
       ></img>
       <div

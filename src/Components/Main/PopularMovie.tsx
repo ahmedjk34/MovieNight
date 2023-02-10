@@ -12,8 +12,12 @@ function PopularMovie({ movieData, setCurrentImg, getImageColor }: Props) {
     <div className="popularMovie">
       <img
         onMouseEnter={(e) => {
-          setCurrentImg(e.target);
-          getImageColor(e.target);
+          setCurrentImg(
+            `https://image.tmdb.org/t/p/original/${movieData.backdrop_path}`
+          );
+          getImageColor(
+            `https://image.tmdb.org/t/p/original/${movieData.backdrop_path}`
+          );
         }}
         src={`https://image.tmdb.org/t/p/original/${movieData.poster_path}`}
       ></img>

@@ -13,13 +13,18 @@ const Main = () => {
       setPageLoaded(true);
     })();
   }, []);
-  const [currentImg, setCurrentImg] = useState<HTMLImageElement | null>(null);
+  const [currentImg, setCurrentImg] = useState<string | null>(null);
   const [imgColor, setImgColor] = useState<number[]>([0, 0, 0]);
   const [pageLoaded, setPageLoaded] = useState<boolean>(false);
   //@ts-ignore
   const colorThief = new ColorThief();
-  function getImageColor(img: HTMLImageElement) {
-    if (img && img.complete) {
+  function getImageColor(image: string) {
+    if (image) {
+      const img = document.createElement("img");
+      img.width = 500;
+      img.height = 500;
+      img.src = image;
+      console.log(img);
       img.crossOrigin = "Anonymous";
       setImgColor(colorThief.getColor(img));
     }
@@ -28,7 +33,6 @@ const Main = () => {
   return pageLoaded ? (
     <div className="main">
       <Overlay imgColor={imgColor} currentImg={currentImg}></Overlay>
-
       <h2>
         Welcome back , <em>Ahmed</em>. Check the latest movies.
       </h2>
@@ -43,7 +47,7 @@ const Main = () => {
       </div>
     </div>
   ) : (
-    "loading...."
+    <h1>Loading....</h1>
   );
 };
 

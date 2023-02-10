@@ -3,6 +3,7 @@ import Overlay from "./Overlay";
 import { fetchPopular } from "../../API";
 import { Movie } from "../../Types/Types";
 import PopularMovie from "./PopularMovie";
+import PopularMoviesHorizontal from "./PopularMoviesHorizontal";
 
 const Main = () => {
   const popularMovies = useRef<Movie[] | null>(null);
@@ -24,9 +25,10 @@ const Main = () => {
       img.width = 500;
       img.height = 500;
       img.src = image;
-      console.log(img);
       img.crossOrigin = "Anonymous";
-      setImgColor(colorThief.getColor(img));
+      img.onload = () => {
+        setImgColor(colorThief.getColor(img));
+      };
     }
   }
 
@@ -37,13 +39,22 @@ const Main = () => {
         Welcome back , <em>Ahmed</em>. Check the latest movies.
       </h2>
       <div className="latestMovies">
-        {popularMovies.current?.slice(0, 4).map((movieData) => (
+        {popularMovies.current?.slice(0, 4).map((movieData, index) => (
           <PopularMovie
             movieData={movieData}
             setCurrentImg={setCurrentImg}
             getImageColor={getImageColor}
+            key={index}
           ></PopularMovie>
         ))}
+      </div>
+      <div className="trendingMovies">
+        <h1>Trending Movies</h1>
+        <div>
+          {popularMovies.current?.slice(6, 8).map((e) => (
+            <PopularMoviesHorizontal movieData={e}></PopularMoviesHorizontal>
+          ))}
+        </div>
       </div>
     </div>
   ) : (
@@ -52,24 +63,3 @@ const Main = () => {
 };
 
 export default Main;
-
-{
-  /* <div className="newMovie">
-          <img
-            onMouseEnter={(e) => {
-              setCurrentImg(e.target);
-              getImageColor(e.target);
-            }}
-            src="https://image.tmdb.org/t/p/w500/fygeMr16EcxJiYhdiO1LEr7iHtI.jpg"
-          ></img>
-        </div>
-        <div className="newMovie">
-          <img
-            onMouseEnter={(e) => {
-              setCurrentImg(e.target);
-              getImageColor(e.target);
-            }}
-            src="https://image.tmdb.org/t/p/w780/oodPJ3Op1pWBhnEFyw5fampRCWf.jpg"
-          ></img>
-        </div> */
-}

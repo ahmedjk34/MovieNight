@@ -1,17 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import Overlay from "./Overlay";
-import { fetchPopular } from "../../API";
+import { fetchDiscover, fetchPopular } from "../../API";
 import { Movie } from "../../Types/Types";
 import PopularMovie from "./PopularMovie";
 import PopularMoviesHorizontal from "./PopularMoviesHorizontal";
+import DiscoverMovies from "./DiscoverMovies";
 
 const Main = () => {
   const popularMovies = useRef<Movie[] | null>(null);
+  const discoverMovies = useRef<Movie[] | null>(null);
   useEffect(() => {
     (async function fetchData() {
       const popularMoviesResponse = await fetchPopular();
       popularMovies.current = popularMoviesResponse.results;
-      setPageLoaded(true);
+      const discoverMoviesResponse = await fetchDiscover();
+      discoverMovies.current = discoverMoviesResponse.results;
+      setTimeout(() => {
+        setPageLoaded(true);
+      }, 1000);
     })();
   }, []);
   const [currentImg, setCurrentImg] = useState<string | null>(null);
@@ -51,11 +57,17 @@ const Main = () => {
       <div className="trendingMovies">
         <h1>Trending Movies</h1>
         <div>
-          {popularMovies.current?.slice(6, 8).map((e) => (
-            <PopularMoviesHorizontal movieData={e}></PopularMoviesHorizontal>
+          {popularMovies.current?.slice(6, 8).map((e, index) => (
+            <PopularMoviesHorizontal
+              movieData={e}
+              key={`hor${index}`}
+            ></PopularMoviesHorizontal>
           ))}
         </div>
       </div>
+      <DiscoverMovies
+        movies={discoverMovies.current?.slice(0, 10) ?? null}
+      ></DiscoverMovies>
     </div>
   ) : (
     <h1>Loading....</h1>

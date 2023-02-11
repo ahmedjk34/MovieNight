@@ -13,6 +13,7 @@ font-family: 'Mulish', sans-serif;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
+
 :root {
 }
 
@@ -58,6 +59,7 @@ nav {
   height: 2rem;
   width: auto;
   transition: transform 0.3s linear;
+  color: white;
 }
 .icon:hover {
   transform: translateY(-5px);
@@ -75,8 +77,9 @@ nav {
 }
 .main {
   display: grid;
-  grid-template: 2rem 85vh 65vh 20vh/1fr;
+  grid-template: 2rem 85vh 65vh 60vh 30vh/1fr;
   gap: 1.5rem;
+  color: white;
 }
 .main h2 {
   align-self: center;
@@ -163,6 +166,9 @@ nav {
   border: 0;
   transition: transform 0.3s linear;
 }
+.popularMovieHorizontal:first-of-type {
+  flex-basis: 60%;
+}
 .popularMovieHorizontal:hover {
   box-shadow: 0px 0px 8px snow;
   transform: scale(1.02);
@@ -176,4 +182,23 @@ nav {
   background-color: rgba(0, 0, 0, 0.6);
   width: 100%;
   padding: 1rem;
+}
+.discoverMovies {
+  font-family: "Merriweather", serif;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.swiperContainer {
+  width: 80vw;
+  min-height: 100%;
+  border-radius: 1rem;
+}
+.movieSlide {
+  height: 100%;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: white !important;
 }

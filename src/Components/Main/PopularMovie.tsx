@@ -1,7 +1,6 @@
 import React from "react";
 import { Movie } from "../../Types/Types";
-import { AiTwotoneStar } from "react-icons/ai";
-
+import { useNavigate } from "react-router-dom";
 type Props = {
   movieData: Movie;
   setCurrentImg: (e: any) => void;
@@ -9,6 +8,7 @@ type Props = {
 };
 
 function PopularMovie({ movieData, setCurrentImg, getImageColor }: Props) {
+  const navigation = useNavigate();
   function handelHover() {
     const bg: HTMLImageElement = document.querySelector(
       ".mainBackground"
@@ -27,7 +27,11 @@ function PopularMovie({ movieData, setCurrentImg, getImageColor }: Props) {
     }, 750);
   }
   return (
-    <div className="popularMovie" onMouseEnter={handelHover}>
+    <div
+      className="popularMovie"
+      onMouseEnter={handelHover}
+      onClick={(e) => navigation(`/movie/${movieData.id}`)}
+    >
       <img
         src={`https://image.tmdb.org/t/p/original/${movieData.poster_path}`}
       ></img>

@@ -20,15 +20,14 @@ function DiscoverMovies({ movies }: Props) {
       <Swiper
         modules={[Navigation, EffectFade]}
         navigation
-        speed={800}
-        effect={"fade"}
+        speed={600}
         slidesPerView={1}
         className="swiperContainer"
         loop
       >
         {movies?.map((movie) => (
           <SwiperSlide className="slide">
-            <MovieSlide movieImg={movie.backdrop_path}></MovieSlide>
+            <MovieSlide movie={movie}></MovieSlide>
           </SwiperSlide>
         ))}
       </Swiper>

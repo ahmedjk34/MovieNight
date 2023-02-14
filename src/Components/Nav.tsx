@@ -9,11 +9,17 @@ import {
   AiOutlineUser,
   AiOutlineHome,
 } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 function Nav() {
+  const navigation = useNavigate();
+
   return (
     <nav>
-      <AiOutlineHome className="icon"></AiOutlineHome>
+      <AiOutlineHome
+        className="icon"
+        onClick={(e) => navigation("/")}
+      ></AiOutlineHome>
       <AiOutlineFire className="icon"></AiOutlineFire>
       <AiOutlineSearch className="icon"></AiOutlineSearch>
       <AiOutlineUser className="icon"></AiOutlineUser>

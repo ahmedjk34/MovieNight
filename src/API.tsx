@@ -16,3 +16,26 @@ export async function fetchDiscover() {
     return await jsonData.json();
   } else throw Error("Error happened fetching discover movies [in response]");
 }
+export async function fetchMovie(id: string | undefined) {
+  if (!id) return; //id is undefined
+  const movieAPI = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`;
+  const jsonData = await fetch(movieAPI);
+  if (jsonData.ok) {
+    return await jsonData.json();
+  } else throw Error("Error happened fetching the movie [in response]");
+}
+export async function fetchWorkers(id: string | undefined) {
+  const workersAPI = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`;
+  const jsonData = await fetch(workersAPI);
+  if (jsonData.ok) {
+    return await jsonData.json();
+  } else throw Error("Error happened fetching the movie's crew [in response]");
+}
+export async function fetchVideos(id: string | undefined) {
+  const videosAPI = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`;
+  const jsonData = await fetch(videosAPI);
+  if (jsonData.ok) {
+    return await jsonData.json();
+  } else
+    throw Error("Error happened fetching the movie's videos [in response]");
+}

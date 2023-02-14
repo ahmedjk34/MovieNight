@@ -7,12 +7,12 @@ import List from "./Components/List/List";
 import Movie from "./Components/Movie/Movie";
 import Performer from "./Components/Performer/Performer";
 import Nav from "./Components/Nav";
+import Footer from "./Components/Footer";
 function App() {
   return (
     <>
-      <Nav></Nav>
-
       <HashRouter basename="/">
+        <Nav></Nav>
         <Routes>
           <Route path="/" element={<Main />}></Route>
           <Route path="/profile/:username" element={<Profile />}></Route>
@@ -23,6 +23,7 @@ function App() {
           <Route path="/movie/:id" element={<Movie />}></Route>
           <Route path="/performer/:id" element={<Performer />}></Route>
         </Routes>
+        <Footer />
       </HashRouter>
     </>
   );

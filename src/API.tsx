@@ -39,3 +39,13 @@ export async function fetchVideos(id: string | undefined) {
   } else
     throw Error("Error happened fetching the movie's videos [in response]");
 }
+export async function fetchSimilarMovies(id: string | undefined) {
+  const similarMoviesAPI = `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${API_KEY}&language=en-US&page=1`;
+  const jsonData = await fetch(similarMoviesAPI);
+  if (jsonData.ok) {
+    return await jsonData.json();
+  } else
+    throw Error(
+      "Error happened fetching the movie's recommendation [in response]"
+    );
+}

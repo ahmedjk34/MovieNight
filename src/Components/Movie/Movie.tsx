@@ -21,6 +21,7 @@ function Movie({}: Props) {
   const { id } = useParams();
   const movieData = useRef<Movie | null>();
   const movieCrew = useRef<Crew[] | null>(null);
+  const moiveCast = useRef<Cast[] | null>(null);
   const [pageLoaded, setPageLoaded] = useState(false);
   const [videos, setVideos] = useState(null);
   function getDirector(): Crew {
@@ -44,9 +45,11 @@ function Movie({}: Props) {
       movieData.current = await fetchMovie(id);
       const workersResponse = await fetchWorkers(id);
       movieCrew.current = workersResponse.crew;
+      moiveCast.current = workersResponse.cast;
+      console.log(moiveCast);
       setPageLoaded(true);
     })();
-  }, []);
+  });
   return pageLoaded ? (
     <div className="moviePage">
       <MovieOverlay
@@ -84,6 +87,7 @@ function Movie({}: Props) {
       <MovieFooter
         movieData={movieData.current}
         crew={movieCrew.current}
+        cast={moiveCast.current}
       ></MovieFooter>
     </div>
   ) : (

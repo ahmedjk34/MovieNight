@@ -265,7 +265,7 @@ nav {
   display: grid;
   margin-top: 17rem;
   grid-template:
-    8rem 4rem 9.25em auto
+    8rem 4rem 9.25rem 1fr
     / 25rem 1fr;
   color: white;
   background: black;
@@ -296,12 +296,13 @@ nav {
 }
 .moviePoster > img {
   height: auto;
-  width: 100%;
+  width: 95%;
   position: relative;
-  top: -15rem;
+  top: -12.5rem;
   border-radius: 1rem;
   border: 2px solid #1e293b;
   font-size: larger;
+  left: 1.2rem;
 }
 .genres {
   display: flex;
@@ -350,7 +351,7 @@ nav {
   margin-top: 1.5rem;
   display: grid;
   grid-column: 1/3;
-  grid-template: min-content minmax(15rem, 70vh) minmax(12rem, 60vh) / 1fr 25rem;
+  grid-template: min-content 1fr 1fr / 1fr 25rem;
 }
 .storyLine {
   display: flex;
@@ -364,13 +365,67 @@ nav {
   padding: 1rem;
   border-bottom: 1px solid snow;
 }
-.cast {
-  grid-area: 1 / 2 / 3/3;
-}
+
 .similar {
   margin-top: 2.5rem;
   grid-column: 1/3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.similar h2 {
+  width: 100%;
+  align-self: flex-start;
 }
 .movieFooter > * {
   padding: 1rem;
+}
+.movieFooter .movieCards {
+  display: flex;
+  width: 80%;
+  gap: 1rem;
+}
+.movieFooter .movieCard {
+  height: 100%;
+  flex: 1;
+  width: 20vw;
+}
+.trailer {
+  height: calc(100% - 3rem);
+  width: 100%;
+}
+.cast {
+  grid-area: 1 / 2 / 3/3;
+  display: grid;
+  grid-template: 5rem/1fr;
+  grid-auto-rows: 5rem;
+  overflow-y: auto;
+}
+.cast > h2 {
+  height: fit-content;
+}
+.castCard {
+  border: 1px solid rgb(99, 97, 97);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: lightcyan;
+  font-size: large;
+  font-family: "Mulish", sans-serif;
+  transition: all 0.2s linear;
+  cursor: pointer;
+}
+.castCard:hover {
+  box-shadow: 0 0 6px white;
+  scale: 1.01;
+}
+.castCard > img {
+  margin-left: 1rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 4rem;
+  border: 2px solid snow;
+  object-fit: cover;
+  object-position: 50%;
 }

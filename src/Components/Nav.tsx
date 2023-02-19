@@ -20,7 +20,10 @@ function Nav() {
         className="icon"
         onClick={(e) => navigation("/")}
       ></AiOutlineHome>
-      <AiOutlineFire className="icon"></AiOutlineFire>
+      <AiOutlineFire
+        className="icon"
+        onClick={(e) => navigation("/trending")}
+      ></AiOutlineFire>
       <AiOutlineSearch className="icon"></AiOutlineSearch>
       <AiOutlineUser className="icon"></AiOutlineUser>
     </nav>

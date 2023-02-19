@@ -8,6 +8,7 @@ import Movie from "./Components/Movie/Movie";
 import Performer from "./Components/Performer/Performer";
 import Nav from "./Components/Nav";
 import Footer from "./Components/Footer";
+import TrendingPage from "./Components/Trending/TrendingPage";
 function App() {
   return (
     <>
@@ -22,6 +23,7 @@ function App() {
           ></Route>
           <Route path="/movie/:id" element={<Movie />}></Route>
           <Route path="/performer/:id" element={<Performer />}></Route>
+          <Route path="/trending" element={<TrendingPage />}></Route>
         </Routes>
         <Footer />
       </HashRouter>

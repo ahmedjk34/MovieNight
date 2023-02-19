@@ -46,7 +46,6 @@ function Movie({}: Props) {
       const workersResponse = await fetchWorkers(id);
       movieCrew.current = workersResponse.crew;
       moiveCast.current = workersResponse.cast;
-      console.log(moiveCast);
       setPageLoaded(true);
     })();
   });

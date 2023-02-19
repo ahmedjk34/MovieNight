@@ -1,9 +1,12 @@
-function getRandomNumber(): number {
-  return Math.floor(Math.random() * (20 - 1 + 1) + 1);
+export function getRandomNumber(max: number, min: number): number {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 const API_KEY = "15dcc523002365590c4aab54ede321b0";
 const topRatedAPI = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
-const discoverAPI = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${getRandomNumber()}&with_watch_monetization_types=flatrate`;
+const discoverAPI = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${getRandomNumber(
+  20,
+  1
+)}&with_watch_monetization_types=flatrate`;
 export async function fetchPopular() {
   const jsonData = await fetch(topRatedAPI);
   if (jsonData.ok) {
@@ -48,4 +51,12 @@ export async function fetchSimilarMovies(id: string | undefined) {
     throw Error(
       "Error happened fetching the movie's recommendation [in response]"
     );
+}
+export async function fetchTrending(pageNumber: number) {
+  console.log(pageNumber);
+  const trendingAPI = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${pageNumber}&with_watch_monetization_types=flatrate&include_adult=false  `;
+  const jsonData = await fetch(trendingAPI);
+  if (jsonData.ok) {
+    return await jsonData.json();
+  } else throw Error("Error happened fetching trending [in response]");
 }

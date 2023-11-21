@@ -1,0 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+#root {
+  display: grid;
+  min-height: 100svh;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 84%,
+    rgba(0, 0, 0, 0.95) 85%,
+    rgba(0, 0, 0, 0.9) 90%,
+    rgba(0, 0, 0, 0.85) 95%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+}
+html {
+  scroll-behavior: smooth;
+}
+::-webkit-scrollbar {
+  display: none;
+}

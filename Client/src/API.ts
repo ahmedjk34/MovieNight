@@ -5,5 +5,16 @@ export async function getPopularMovies() {
   const response = await axios.get(
     `https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`
   );
-  return response.data.results.slice(0, 4);
+  return response.data.results.slice(0, 6);
+}
+export async function getGenreList(ids: Number[]) {
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/genre/movie/list??api_key=${API_KEY}`
+  );
+  console.log(response.data.results);
+}
+export async function getMovieDetails(id: Number = 0) {
+  const movieInfoResponse = await axios.get(`
+  https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`);
+  return movieInfoResponse.data;
 }

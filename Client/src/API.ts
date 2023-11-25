@@ -5,7 +5,7 @@ export async function getPopularMovies() {
   const response = await axios.get(
     `https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`
   );
-  return response.data.results.slice(0, 6);
+  return response.data.results.slice(0, 13);
 }
 export async function getGenreList(ids: Number[]) {
   const response = await axios.get(

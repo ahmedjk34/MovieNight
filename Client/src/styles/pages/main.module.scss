@@ -1,0 +1,196 @@
+@use "../variables/variables" as v;
+@use "../mixins//mixins" as m;
+//Animations
+@keyframes hoverMovie {
+  from {
+    transform: translateY(0%) skew(20deg);
+    opacity: 0;
+    visibility: visible;
+  }
+  50% {
+    transform: translateY(10%) scale(1.05);
+  }
+  to {
+    transform: translateY(0%) skew(0);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.main {
+  .trendingMovies {
+    margin-top: 10rem;
+    color: white;
+    & > h1 {
+      text-align: center;
+      font-family: v.$titleFont;
+      font-weight: 700;
+      margin-bottom: 4rem;
+    }
+    .moviesWrapper {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template: minmax(400px, 520px) / repeat(auto-fit, minmax(300px, 1fr));
+      grid-auto-rows: minmax(400px, 520px);
+      padding: 1rem 2rem;
+      gap: 1rem;
+      .movie {
+        height: 100%;
+        width: 100%;
+        .backgroundImg {
+          height: 110svh;
+          object-fit: contain;
+          object-position: 50% -10rem;
+          height: 100%;
+          width: 100%;
+          position: absolute;
+          z-index: -1;
+          top: 0;
+          right: 0;
+          opacity: 0.4;
+          visibility: hidden;
+          transition: all 0.3s linear;
+          &.active {
+            visibility: visible;
+            opacity: 1;
+          }
+        }
+        .movieCard {
+          @include m.verticalMovieCard;
+          transition: all 0.25s linear;
+          overflow: hidden;
+          &:hover {
+            border: 2px solid white;
+            scale: 1.02;
+            .movieInfo {
+              animation: hoverMovie 0.65s ease-in-out;
+              animation-fill-mode: forwards;
+            }
+          }
+          .moviePoster {
+            width: 100%;
+            object-fit: cover;
+            border-radius: inherit;
+          }
+          .movieInfo {
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            position: absolute;
+            top: 0;
+            border-radius: inherit;
+            height: 100%;
+            width: 100%;
+            padding: 1rem;
+            display: grid;
+            grid-template: auto auto 1fr / 1fr;
+            gap: 1rem;
+            transform: translateY(100%);
+            visibility: hidden;
+            h3 {
+              font-family: v.$titleFont;
+              font-weight: 700;
+            }
+            p {
+              font-family: v.$helperFont;
+              font-weight: 500;
+            }
+            .mainInfo {
+              display: flex;
+              width: 100%;
+              justify-content: space-between;
+              font-family: v.$mainFont;
+              //release date
+              span {
+                color: rgba(211, 211, 211, 0.866);
+              }
+            }
+            .genres {
+              margin-top: 0.75rem;
+              display: flex;
+              width: 100%;
+              gap: 0.5rem;
+              justify-content: center;
+              border-bottom: 2px double gray;
+              padding: 0 0 1rem 0;
+              .genre {
+                background-color: black;
+                border-radius: 0.4rem;
+                height: 3.25rem;
+                padding: 0 1rem;
+                border: 2px solid gray;
+                font-family: v.$titleFont;
+                font-weight: 400;
+                font-size: 0.91rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  //
+  .todaysChoices {
+    padding: 1rem 2rem;
+    h1 {
+      font-family: v.$titleFont;
+      font-weight: 700;
+      color: white;
+    }
+    //wrapper
+    & > div {
+      margin-top: 1rem;
+      display: grid;
+      grid-template: 1fr / 2fr 1fr;
+      gap: 2rem;
+      .movie {
+        position: relative;
+        img {
+          border-radius: 2rem;
+          width: 100%;
+          height: 25vw;
+          object-fit: cover;
+          box-shadow: 0 0 4px white;
+          transition: all 0.4s linear;
+          &:hover {
+            scale: 1.02;
+          }
+        }
+        .infoOverlay {
+          position: absolute;
+          bottom: 0;
+          border-radius: 0rem 0rem 2rem 2rem;
+          color: white;
+          width: 100%;
+          background: rgb(0, 0, 0);
+          background: linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 1) 0%,
+            rgba(0, 0, 0, 0.7) 80%,
+            rgba(0, 0, 0, 0.4) 100%
+          );
+          font-family: v.$mainFont;
+          height: clamp(3.2rem, 17%, 6.1rem);
+          display: flex;
+          padding: 0 1rem;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          font-size: large;
+          transition: all 0.4s linear;
+          border-top: 2px double gray;
+        }
+        &:hover {
+          .infoOverlay {
+            scale: 1.02;
+          }
+        }
+      }
+    }
+  }
+  .discover {
+  }
+}

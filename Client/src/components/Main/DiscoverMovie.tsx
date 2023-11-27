@@ -1,6 +1,7 @@
 import React from "react";
 import { Movie } from "../../Types";
 import styles from "../../styles/pages/main.module.scss";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   movie: Movie;
@@ -14,6 +15,7 @@ function DiscoverMovie({
   current: current,
   next: next,
 }: Props) {
+  const navigate = useNavigate();
   function handleIsActive() {
     if (prev) return "prev";
     else if (current) return "current";
@@ -21,7 +23,11 @@ function DiscoverMovie({
     else return "inactive";
   }
   return (
-    <div className={styles.movie} data-active={handleIsActive()}>
+    <div
+      className={styles.movie}
+      data-active={handleIsActive()}
+      onClick={() => navigate(`/movie/${movie.id}`)}
+    >
       <img
         src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
       ></img>

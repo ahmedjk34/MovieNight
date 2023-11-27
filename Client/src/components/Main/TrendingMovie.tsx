@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
+import { useNavigate } from "react-router-dom";
 import { getMovieDetails } from "../../API";
 import styles from "../../styles/pages/main.module.scss";
 import { Movie } from "../../Types";
@@ -14,6 +14,8 @@ function TrendingMovie({ movie: movie, index: index }: Props) {
   const backgroundImg = useRef<HTMLImageElement>(null);
   const [movieInfo, setMovieInfo] = useState<Movie | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+
   useEffect(() => {
     (async function () {
       try {
@@ -34,7 +36,11 @@ function TrendingMovie({ movie: movie, index: index }: Props) {
     backgroundImg.current?.classList.add(`${styles.active}`);
   }
   return (
-    <div className={styles.movie} onMouseEnter={() => handleActivity()}>
+    <div
+      className={styles.movie}
+      onMouseEnter={() => handleActivity()}
+      onClick={() => navigate(`/movie/${movie?.id}`)}
+    >
       {/*//? NoteI used !index for initial load*/}
       <img
         src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}

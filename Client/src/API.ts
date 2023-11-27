@@ -14,7 +14,13 @@ export async function getGenreList(ids: Number[]) {
   console.log(response.data.results);
 }
 export async function getMovieDetails(id: Number = 0) {
-  const movieInfoResponse = await axios.get(`
+  const response = await axios.get(`
   https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`);
-  return movieInfoResponse.data;
+  return response.data;
+}
+export async function getMovieCast(id: Number = 0) {
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}}`
+  );
+  return response.data;
 }

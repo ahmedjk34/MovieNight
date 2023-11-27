@@ -1,0 +1,30 @@
+@use "../variables/variables" as v;
+@use "../mixins/mixins" as m;
+.moviePage {
+  .backgroundImage {
+    height: 80vh;
+    width: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: -1;
+  }
+  .mainSection {
+    padding: 2rem;
+    color: white;
+    display: flex;
+    width: 100%;
+    * {
+      flex: 1;
+    }
+    .poster {
+      @include m.verticalMovieCard;
+
+      overflow: hidden;
+      margin-top: -60vh;
+      img {
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}

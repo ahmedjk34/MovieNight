@@ -65,6 +65,7 @@
           &:hover {
             border: 2px solid white;
             scale: 1.02;
+            cursor: pointer;
             .movieInfo {
               animation: hoverMovie 0.65s ease-in-out;
               animation-fill-mode: forwards;
@@ -150,16 +151,13 @@
       gap: 2rem;
       .movie {
         position: relative;
+        transition: all 0.4s linear;
         img {
           border-radius: 2rem;
           width: 100%;
           height: 25vw;
           object-fit: cover;
           box-shadow: 0 0 4px white;
-          transition: all 0.4s linear;
-          &:hover {
-            scale: 1.02;
-          }
         }
         .infoOverlay {
           position: absolute;
@@ -182,13 +180,11 @@
           align-items: center;
           text-align: center;
           font-size: large;
-          transition: all 0.4s linear;
           border-top: 2px double gray;
         }
         &:hover {
-          .infoOverlay {
-            scale: 1.02;
-          }
+          scale: 1.02;
+          cursor: pointer;
         }
       }
     }
@@ -260,6 +256,10 @@
         font-family: v.$mainFont;
         transition: all 0.5s ease-in-out;
         opacity: 0;
+      }
+      &:hover {
+        cursor: pointer;
+        box-shadow: 0 0 12px red;
       }
     }
     h1 {

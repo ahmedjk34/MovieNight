@@ -20,7 +20,7 @@ export async function getMovieDetails(id: Number = 0) {
 }
 export async function getMovieCast(id: Number = 0) {
   const response = await axios.get(
-    `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}}`
+    `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}`
   );
   return response.data;
 }

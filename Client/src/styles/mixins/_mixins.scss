@@ -16,3 +16,25 @@
     color: white;
   }
 }
+@mixin glowHover {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  &:hover {
+    &::after {
+      opacity: 0.4;
+    }
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: calc(var(--y, 0) * 1px - 50px);
+    left: calc(var(--x, 0) * 1px - 50px);
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(white, #3984ff00 80%);
+
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+}

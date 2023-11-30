@@ -35,3 +35,24 @@ export function getDirector(cast: any): Cast | null {
   //@ts-ignore
   return cast.crew.filter(({ job: job }) => job === "Director")[0];
 }
+
+export function createCastCard(cast: Cast, type: "Actor" | "Crew") {
+  console.log(cast);
+  return (
+    <div className={styles.castMember}>
+      <div>
+        <img
+          src={
+            cast.profile_path != null
+              ? `https://image.tmdb.org/t/p/original/${cast.profile_path}`
+              : "https://i0.wp.com/www.zuckermanlaw.com/wp-content/uploads/whistleblowing/anonymous-sec-whistleblower.jpg?fit=1004%2C1045&ssl=1"
+          }
+        ></img>
+      </div>
+      <div className={styles.castInfo}>
+        <h4>{cast.name}</h4>
+        <span> {type == "Actor" ? cast.character : cast.job}</span>
+      </div>
+    </div>
+  );
+}

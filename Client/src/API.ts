@@ -24,3 +24,14 @@ export async function getMovieCast(id: Number = 0) {
   );
   return response.data;
 }
+export async function getTrailer(id: number): Promise<Boolean | String> {
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`
+  );
+  if (response.data == []) return false;
+  //@ts-ignore
+  const trailerObject = response.data.results.filter(
+    ({ type }) => type == "Teaser" || type == "Trailer"
+  )[0];
+  return trailerObject.key;
+}

@@ -5,6 +5,7 @@ import styles from "../../styles/pages/main.module.scss";
 import TrendingMovie from "./TrendingMovie";
 import TodaysChoiceMovie from "./TodaysChoiceMovie";
 import DiscoverMovie from "./DiscoverMovie";
+import LoadingPage from "../LoadingPage";
 
 type Props = {};
 
@@ -24,9 +25,7 @@ function Main({}: Props) {
       setIsLoading(false);
     })();
   }, []);
-  useEffect(() => {
-    if (isLoading) return;
-  }, [isLoading]);
+
   function handleArrows(action: "Next" | "Prev") {
     if (action == "Next") {
       setActiveSlides((prev) => ({
@@ -43,57 +42,60 @@ function Main({}: Props) {
     }
   }
   return (
-    <div className={styles.main}>
-      <div className={styles.trendingMovies}>
-        <h1>Welcome Back , Ahmed. Here's what people are watching.</h1>
-        <div className={styles.moviesWrapper}>
-          {movies?.slice(0, 4).map((movie, index) => (
-            <TrendingMovie
-              movie={movie}
-              index={index}
-              key={`${index} TrendingMovie`}
-            />
-          ))}
-        </div>
-      </div>
-      <div className={styles.todaysChoices}>
-        <h1>Today's Choice</h1>
-        <div>
-          {movies?.slice(4, 6).map((movie, index) => (
-            <TodaysChoiceMovie movie={movie} key={`${index} TodaysChoice`} />
-          ))}
-        </div>
-      </div>
-      <div className={styles.discover}>
-        <h1>Discover</h1>
-        <div>
-          {movies?.slice(6).map((movie, index) => (
-            <DiscoverMovie
-              movie={movie}
-              prev={activeSlides.prev == index ? true : false}
-              current={activeSlides.current == index ? true : false}
-              next={activeSlides.next == index ? true : false}
-              key={`${index} Discover`}
-            />
-          ))}
-          <div
-            className={`${styles.arrow} ${styles.right}`}
-            onClick={() => handleArrows("Next")}
-            style={{ display: activeSlides.next == 6 ? "none" : "block" }}
-          >
-            {">"}
+    <>
+      <div className={styles.main}>
+        <div className={styles.trendingMovies}>
+          <h1>Welcome Back , Ahmed. Here's what people are watching.</h1>
+          <div className={styles.moviesWrapper}>
+            {movies?.slice(0, 4).map((movie, index) => (
+              <TrendingMovie
+                movie={movie}
+                index={index}
+                key={`${index} TrendingMovie`}
+              />
+            ))}
           </div>
-          <div
-            className={`${styles.arrow} ${styles.left}`}
-            onClick={() => handleArrows("Prev")}
-            style={{ display: activeSlides.prev == 0 ? "none" : "block" }}
-          >
-            {"<"}
+        </div>
+        <div className={styles.todaysChoices}>
+          <h1>Today's Choice</h1>
+          <div>
+            {movies?.slice(4, 6).map((movie, index) => (
+              <TodaysChoiceMovie movie={movie} key={`${index} TodaysChoice`} />
+            ))}
           </div>
-          <div className={styles.overlay}></div>
+        </div>
+        <div className={styles.discover}>
+          <h1>Discover</h1>
+          <div>
+            {movies?.slice(6).map((movie, index) => (
+              <DiscoverMovie
+                movie={movie}
+                prev={activeSlides.prev == index ? true : false}
+                current={activeSlides.current == index ? true : false}
+                next={activeSlides.next == index ? true : false}
+                key={`${index} Discover`}
+              />
+            ))}
+            <div
+              className={`${styles.arrow} ${styles.right}`}
+              onClick={() => handleArrows("Next")}
+              style={{ display: activeSlides.next == 6 ? "none" : "block" }}
+            >
+              {">"}
+            </div>
+            <div
+              className={`${styles.arrow} ${styles.left}`}
+              onClick={() => handleArrows("Prev")}
+              style={{ display: activeSlides.prev == 0 ? "none" : "block" }}
+            >
+              {"<"}
+            </div>
+            <div className={styles.overlay}></div>
+          </div>
         </div>
       </div>
-    </div>
+      <LoadingPage isLoading={isLoading}></LoadingPage>
+    </>
   );
 }
 

@@ -12,6 +12,7 @@ import "react-circular-progressbar/dist/styles.css";
 import { getDirector } from "../Utility";
 import MainSection from "./MainSection";
 import SupplementarySection from "./SupplementarySection";
+import LoadingPage from "../LoadingPage";
 type Props = {};
 
 function Movie({}: Props) {
@@ -40,20 +41,23 @@ function Movie({}: Props) {
     })();
   }, [id]);
   return (
-    <div className={styles.moviePage}>
-      <img
-        className={styles.backgroundImage}
-        src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
-      ></img>
-      <MainSection movie={movie} director={director} isLoading={isLoading} />
-      <SupplementarySection
-        movie={movie}
-        trailer={trailer}
-        cast={cast}
-        isLoading={isLoading}
-        recommendations={recommendations}
-      />
-    </div>
+    <>
+      <div className={styles.moviePage}>
+        <img
+          className={styles.backgroundImage}
+          src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
+        ></img>
+        <MainSection movie={movie} director={director} isLoading={isLoading} />
+        <SupplementarySection
+          movie={movie}
+          trailer={trailer}
+          cast={cast}
+          isLoading={isLoading}
+          recommendations={recommendations}
+        />
+      </div>
+      <LoadingPage isLoading={isLoading}></LoadingPage>
+    </>
   );
 }
 

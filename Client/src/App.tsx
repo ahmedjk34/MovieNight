@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { getGenreList } from "./API";
 import Discover from "./components/Discover-Page/Discover";
 import Footer from "./components/Footer";
 import Main from "./components/Main/Main";
@@ -8,6 +9,7 @@ import "./styles/pages/global-rules.scss";
 type Props = {};
 
 function App({}: Props) {
+  getGenreList();
   return (
     <>
       <Nav />

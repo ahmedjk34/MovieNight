@@ -1,15 +1,24 @@
-import { Cast, Movie } from "../../Types";
+import { Cast, Genre, Movie } from "../../Types";
 import styles from "../../styles/pages/movie.module.scss";
-import { createCastCard } from "./Utility";
+import { createCastCard } from "../Utility";
 import { useLayoutEffect } from "react";
+import Reviews from "./Reviews";
+import MovieCardVertical from "../MovieCardVertical";
 
 type Props = {
   movie: Movie | null;
   trailer: String | Boolean;
   cast: { cast: Cast[]; crew: Cast[] } | null;
+  recommendations: Movie[] | null;
   isLoading: boolean;
 };
-function SupplementarySection({ movie, trailer, cast, isLoading }: Props) {
+function SupplementarySection({
+  movie,
+  trailer,
+  cast,
+  recommendations,
+  isLoading,
+}: Props) {
   useLayoutEffect(() => {
     const castHolder = document.querySelectorAll(
       `.${styles.castHolder} `
@@ -47,19 +56,33 @@ function SupplementarySection({ movie, trailer, cast, isLoading }: Props) {
         <div>
           <h2>Actors</h2>
           <div className={styles.castHolder}>
-            {cast?.cast.slice(0, 5).map((actor) => (
-              <>{createCastCard(actor, "Actor")}</>
+            {cast?.cast.slice(0, 5).map((actor, index) => (
+              <>{createCastCard(actor, "Actor", `${index}Actor`)}</>
             ))}
           </div>
         </div>
         <div>
           <h2>Crew</h2>
           <div className={styles.castHolder}>
-            {cast?.crew.slice(0, 5).map((actor) => (
-              <>{createCastCard(actor, "Crew")}</>
+            {cast?.crew.slice(0, 5).map((actor, index) => (
+              <>{createCastCard(actor, "Crew", `${index}Crew`)}</>
             ))}
           </div>
         </div>
+      </div>
+      {/*because the reviews section has a lot of logic -> make it's own component */}
+      <Reviews />
+      <div className={styles.recommendations}>
+        <h2>Recommendations</h2>
+        {recommendations?.length ? (
+          <div>
+            {recommendations?.map((movie, index) => (
+              <MovieCardVertical movie={movie} key={`${index}${movie.id}`} />
+            ))}
+          </div>
+        ) : (
+          <h3>There isn't any recommendations currently</h3>
+        )}
       </div>
     </div>
   );

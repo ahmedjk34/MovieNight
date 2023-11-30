@@ -1,5 +1,5 @@
 import Rating from "../Rating";
-import { getDuration } from "./Utility";
+import { getDuration } from "../Utility";
 import styles from "../../styles/pages/movie.module.scss";
 import { Cast, Movie } from "../../Types";
 import { useLayoutEffect } from "react";
@@ -47,7 +47,7 @@ function MainSection({ movie, director, isLoading }: Props) {
           </h2>
           <h2 className={styles.info}>
             <span>Directed By: </span>
-            <div> {director?.name}</div>
+            <div> {director?.name ?? "Unknown"}</div>
           </h2>
           {getDuration(movie?.runtime ?? 0)}
         </div>

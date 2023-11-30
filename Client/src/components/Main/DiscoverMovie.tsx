@@ -1,4 +1,3 @@
-import React from "react";
 import { Movie } from "../../Types";
 import styles from "../../styles/pages/main.module.scss";
 import { useNavigate } from "react-router-dom";

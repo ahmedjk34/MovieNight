@@ -1,5 +1,6 @@
-import styles from "../../styles/pages/movie.module.scss";
-import { Cast } from "../../Types";
+import { getGenreList } from "../API";
+import styles from "../styles/pages/movie.module.scss";
+import { Cast, Genre } from "../Types";
 
 export function getDuration(duration: number) {
   const hours = Math.floor(duration / 60);
@@ -36,10 +37,9 @@ export function getDirector(cast: any): Cast | null {
   return cast.crew.filter(({ job: job }) => job === "Director")[0];
 }
 
-export function createCastCard(cast: Cast, type: "Actor" | "Crew") {
-  console.log(cast);
+export function createCastCard(cast: Cast, type: "Actor" | "Crew", key: Key) {
   return (
-    <div className={styles.castMember}>
+    <div className={styles.castMember} key={key}>
       <div>
         <img
           src={
@@ -55,4 +55,12 @@ export function createCastCard(cast: Cast, type: "Actor" | "Crew") {
       </div>
     </div>
   );
+}
+export async function getMovieGenres(ids: Number[] | undefined) {
+  if (!ids) return;
+  const genresList = await getGenreList();
+  const movieGenres = genresList.genres.filter((genre: Genre) =>
+    ids.includes(genre.id)
+  );
+  return movieGenres;
 }

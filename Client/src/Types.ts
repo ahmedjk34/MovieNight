@@ -67,5 +67,6 @@ export interface Cast {
   profile_path: null;
   credit_id: string;
   department: string;
-  job: string;
+  job?: string;
+  character?: string;
 }

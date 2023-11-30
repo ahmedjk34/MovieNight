@@ -1,5 +1,7 @@
 @use "../variables/variables" as v;
 @use "../mixins/mixins" as m;
+
+$border-color: rgba(128, 128, 128, 0.35);
 .moviePage {
   .backgroundImage {
     height: 80vh;
@@ -9,7 +11,7 @@
     z-index: -1;
   }
   .mainSection {
-    margin-top: -20vh;
+    margin-top: -45vh;
     padding: 2rem;
     color: white;
     display: flex;
@@ -23,9 +25,10 @@
     > div:nth-child(2) {
       //the div with the title
       flex: 2.4;
-      padding: 1rem;
+      padding: 0.2rem 1rem;
       display: flex;
       flex-direction: column;
+      justify-content: flex-end;
       gap: 0.8rem;
       .infoSection {
         width: 100%;
@@ -35,10 +38,14 @@
     }
     .votes {
       margin-left: 2rem;
-      display: grid;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       gap: 1rem;
-      grid-template: 1fr/ 1fr 1fr;
-      place-items: center;
+      svg {
+        width: clamp(6rem, 65%, 12rem);
+      }
       > h2 {
         display: flex;
         flex-direction: column;
@@ -55,7 +62,6 @@
     .poster {
       @include m.verticalMovieCard;
       overflow: hidden;
-      margin-top: -40vh;
       img {
         width: 100%;
         object-fit: cover;
@@ -87,6 +93,93 @@
         color: white;
         font-family: v.$mainFont;
         @include m.glowHover;
+      }
+    }
+  }
+  .supplementarySection {
+    padding: 0 2rem;
+    min-height: 100svh;
+    display: grid;
+    grid-template: auto 1fr / 3fr 1fr;
+    gap: 1rem;
+    color: white;
+    //titles
+    h2 {
+      font-size: 2rem;
+      font-family: v.$titleFont;
+      border-bottom: 1px solid $border-color;
+      margin-bottom: 0.5rem;
+    }
+    .plot {
+      p {
+        font-family: v.$mainFont;
+        font-size: 1.25rem;
+        opacity: 0.75;
+      }
+    }
+    .trailer {
+      grid-column: 1/2;
+      > iframe {
+        width: 100%;
+        aspect-ratio: 16/9;
+      }
+      //in case there is no trailer
+      > div {
+        display: grid;
+        height: 100%;
+        width: 100%;
+        place-content: center;
+        font-family: v.$titleFont;
+        font-size: 2rem;
+      }
+    }
+    .cast {
+      grid-column: 2/3;
+      grid-row: 1/3;
+      h2 {
+        border: none;
+        text-align: center;
+        margin: 2rem 0;
+      }
+      .castHolder {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+      .castMember {
+        display: flex;
+        align-items: center;
+        height: 4rem;
+        gap: 1rem;
+        border-radius: 1rem;
+        @include m.glowHover;
+        padding: 2.5rem 1rem;
+        box-shadow: 0 0 0px white;
+        //extra effects
+        transition: all 0.5s;
+        &:hover {
+          box-shadow: 0 0 12px white;
+          transform: translateY(-10%);
+        }
+        img {
+          width: 4rem;
+          height: 4rem;
+          border-radius: 2rem;
+          object-fit: cover;
+          position: relative;
+          z-index: 2;
+        }
+        .castInfo {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          font-size: large;
+          font-family: v.$mainFont;
+          padding: 1rem;
+          span {
+            opacity: 0.5;
+          }
+        }
       }
     }
   }

@@ -7,7 +7,10 @@ type Props = {
 function LoadingPage({ isLoading }: Props) {
   const [zIndex, setZIndex] = useState(99);
   useEffect(() => {
-    if (isLoading) return;
+    if (isLoading) {
+      setZIndex(99);
+      return;
+    }
     setTimeout(() => setZIndex(-99), 750);
   }, [isLoading]);
   return (

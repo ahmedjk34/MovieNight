@@ -18,8 +18,16 @@ function Nav({}: Props) {
         color={"white"}
         onClick={() => navigation("/")}
       />
-      <AiOutlineFire size={28} color={"white"} />
-      <AiOutlineSearch size={28} color={"white"} />
+      <AiOutlineFire
+        size={28}
+        color={"white"}
+        onClick={() => navigation("/discover")}
+      />
+      <AiOutlineSearch
+        size={28}
+        color={"white"}
+        onClick={() => navigation("/search")}
+      />
       <AiOutlineUser size={28} color={"white"} />
     </div>
   );

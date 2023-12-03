@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Main from "./components/Main/Main";
 import Movie from "./components/Movie-Page/Movie";
 import Nav from "./components/Nav";
+import Search from "./components/Search-Page/Search";
 import "./styles/pages/global-rules.scss";
 type Props = {};
 
@@ -17,6 +18,7 @@ function App({}: Props) {
         <Route element={<Main />} path="/" />
         <Route element={<Discover />} path="/discover" />
         <Route element={<Movie />} path="movie/:id" />
+        <Route element={<Search />} path="/search" />
       </Routes>
       <Footer />
     </>

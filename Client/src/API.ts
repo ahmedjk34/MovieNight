@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Genre } from "./Types";
 const API_KEY = "15dcc523002365590c4aab54ede321b0";
 export async function getMainMovies() {
   const response = await axios.get(
@@ -40,4 +41,10 @@ export async function getRecommendations(id: Number) {
     https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${API_KEY}`
   );
   return response.data.results.slice(0, 4);
+}
+export async function getDiscoverMovies(page: Number, genres: Number[]) {
+  const genresList = genres.join(",") ?? "";
+  const response = await axios.get(`
+  https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&page=${page}&with_genres=${genresList}`);
+  return response.data;
 }

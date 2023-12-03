@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "../styles/pages/movie-card-vertical.module.scss";
 import { Genre, Movie } from "../Types";
 import { getMovieGenres } from "./Utility";
+import { v4 as uuidv4 } from "uuid";
 
 type Props = {
   movie: Movie | null;
@@ -51,7 +52,10 @@ function MovieCardVertical({ movie }: Props) {
             <h3>Genres:</h3>
             <div className={styles.genres}>
               {genres?.slice(0, 3).map((g, index) => (
-                <div className={styles.genre} key={index + g.id}>
+                <div
+                  className={styles.genre}
+                  key={uuidv4() + index + g.id + "MovieCard"}
+                >
                   {g.name}
                 </div>
               ))}

@@ -48,3 +48,12 @@ export async function getDiscoverMovies(page: Number, genres: Number[]) {
   https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&page=${page}&with_genres=${genresList}`);
   return response.data;
 }
+export async function getSearchResults(input: String) {
+  if (input == " ") return false;
+  const query = input.split(" ").join("+");
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=${API_KEY}`
+  );
+  if (!response.data.results.length) return false;
+  return response.data.results.slice(0, 5);
+}

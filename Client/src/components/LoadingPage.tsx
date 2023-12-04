@@ -6,19 +6,25 @@ type Props = {
 
 function LoadingPage({ isLoading }: Props) {
   const [zIndex, setZIndex] = useState(99);
+  const [transition, setTransition] = useState("opacity 1s ease-in-out");
   useEffect(() => {
     if (isLoading) {
       setZIndex(99);
+      setTransition("opacity 1s ease-in-out");
       return;
     }
-    setTimeout(() => setZIndex(-99), 750);
+    setTimeout(() => {
+      setZIndex(-99);
+      setTransition("none");
+    }, 1000);
   }, [isLoading]);
   return (
     <div
       className={styles.loadingPage}
       style={{
         opacity: isLoading ? 1 : 0,
-        zIndex,
+        zIndex: zIndex,
+        transition: transition,
       }}
     >
       <div className={styles.spinner}>

@@ -34,7 +34,7 @@ function MainSection({ movie, director, isLoading }: Props) {
       <div>
         <h1>{movie?.title}</h1>
         <div className={styles.genres}>
-          {movie?.genres.map((genre, index) => (
+          {movie?.genres?.map((genre, index) => (
             <button className={styles.genre} key={`${genre.name} + ${index}`}>
               {genre.name}
             </button>

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Movie } from "../../Types";
+import { useEffect, useState } from "react";
+import { Genre, Movie } from "../../Types";
 import styles from "../../styles/pages/search.module.scss";
 import { getMovieGenres } from "../Utility";
 import { v4 as uuidv4 } from "uuid";

@@ -1,4 +1,4 @@
-import { Cast, Genre, Movie } from "../../Types";
+import { Cast, Movie } from "../../Types";
 import styles from "../../styles/pages/movie.module.scss";
 import { createCastCard } from "../Utility";
 import { useLayoutEffect } from "react";

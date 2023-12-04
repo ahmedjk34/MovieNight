@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Genre } from "./Types";
 const API_KEY = "15dcc523002365590c4aab54ede321b0";
 export async function getMainMovies() {
   const response = await axios.get(
@@ -31,7 +30,7 @@ export async function getTrailer(id: number): Promise<Boolean | String> {
   if (response.data == []) return false;
   //@ts-ignore
   const trailerObject = response.data.results.filter(
-    ({ type }) => type == "Teaser" || type == "Trailer"
+    ({ type }: { type: string }) => type == "Teaser" || type == "Trailer"
   )[0];
   return trailerObject.key;
 }

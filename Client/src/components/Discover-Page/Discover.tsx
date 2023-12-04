@@ -19,7 +19,6 @@ function Discover({}: Props) {
   useEffect(() => {
     (async function () {
       const moviesResponse = await getDiscoverMovies(page, filters);
-
       setMovies(moviesResponse.results.slice(0, 16));
       setIsLoading(false);
     })();

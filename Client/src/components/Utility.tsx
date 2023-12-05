@@ -1,3 +1,5 @@
+import { User } from "@auth0/auth0-react";
+import { Key } from "react";
 import { getGenreList } from "../API";
 import styles from "../styles/pages/movie.module.scss";
 import { Cast, Genre } from "../Types";
@@ -63,4 +65,7 @@ export async function getMovieGenres(ids: Number[] | undefined) {
     ids.includes(genre.id)
   );
   return movieGenres;
+}
+export function getUserId(user: User | undefined) {
+  return user?.sub?.substring(user?.sub?.indexOf("|") + 1);
 }

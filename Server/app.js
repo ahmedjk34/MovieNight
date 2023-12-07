@@ -4,7 +4,7 @@ const httpErrors = require("http-errors");
 const logger = require("morgan");
 const path = require("path");
 const mongoose = require("mongoose");
-const router = require("./routes/index");
+const router = require("./routes/userRouter");
 
 const app = express();
 

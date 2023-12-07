@@ -32,7 +32,8 @@ export async function getTrailer(id: number): Promise<Boolean | String> {
   const trailerObject = response.data.results.filter(
     ({ type }: { type: string }) => type == "Teaser" || type == "Trailer"
   )[0];
-  return trailerObject.key;
+
+  return trailerObject?.key;
 }
 export async function getRecommendations(id: Number) {
   const response = await axios.get(

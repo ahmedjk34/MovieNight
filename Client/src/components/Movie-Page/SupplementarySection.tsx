@@ -4,6 +4,7 @@ import { createCastCard } from "../Utility";
 import { useLayoutEffect } from "react";
 import Reviews from "./Reviews";
 import MovieCardVertical from "../MovieCardVertical";
+import { v4 } from "uuid";
 
 type Props = {
   movie: Movie | null;
@@ -64,8 +65,8 @@ function SupplementarySection({
         <div>
           <h2>Crew</h2>
           <div className={styles.castHolder}>
-            {cast?.crew.slice(0, 5).map((actor, index) => (
-              <>{createCastCard(actor, "Crew", `${index}Crew`)}</>
+            {cast?.crew.slice(0, 5).map((actor) => (
+              <>{createCastCard(actor, "Crew", v4())}</>
             ))}
           </div>
         </div>
@@ -76,8 +77,8 @@ function SupplementarySection({
         <h2>Recommendations</h2>
         {recommendations?.length ? (
           <div>
-            {recommendations?.map((movie, index) => (
-              <MovieCardVertical movie={movie} key={`${index}${movie.id}`} />
+            {recommendations?.map((movie) => (
+              <MovieCardVertical movie={movie} key={v4()} />
             ))}
           </div>
         ) : (

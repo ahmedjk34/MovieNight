@@ -3,6 +3,7 @@ import { Genre, Movie } from "../../Types";
 import styles from "../../styles/pages/search.module.scss";
 import { getMovieGenres } from "../Utility";
 import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   movie: Movie;
@@ -10,6 +11,7 @@ type Props = {
 
 function MovieCard({ movie }: Props) {
   const [genres, setGenres] = useState<Genre[] | null>(null);
+  const navigation = useNavigate();
 
   useEffect(() => {
     (async function () {
@@ -22,7 +24,10 @@ function MovieCard({ movie }: Props) {
     })();
   }, []);
   return (
-    <div className={styles.movie}>
+    <div
+      className={styles.movie}
+      onClick={() => navigation(`/movie/${movie?.id}`)}
+    >
       <img
         src={
           movie?.poster_path != null

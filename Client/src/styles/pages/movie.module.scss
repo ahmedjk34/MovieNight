@@ -197,3 +197,51 @@ $border-color: rgba(128, 128, 128, 0.35);
     }
   }
 }
+
+@media only screen and (max-width: 1000px) {
+  .moviePage {
+    .mainSection {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      h1 {
+        text-align: center;
+      }
+      .genres {
+        justify-content: center;
+      }
+      .poster {
+        width: 15rem;
+      }
+    }
+    .supplementarySection {
+      .cast {
+        .castMember {
+          height: 8rem;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 700px) {
+  .moviePage {
+    .mainSection {
+      .poster {
+        width: max(10rem, 40vw);
+      }
+    }
+    .supplementarySection {
+      .cast {
+        .castMember {
+          flex-direction: column;
+          height: auto;
+          text-align: center;
+          img {
+            width: 2rem;
+            height: 2rem;
+          }
+        }
+      }
+    }
+  }
+}

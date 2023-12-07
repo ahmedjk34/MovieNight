@@ -45,7 +45,14 @@ export async function getDiscoverMovies(page: Number, genres: Number[]) {
   const genresList = genres.join(",") ?? "";
   const response = await axios.get(`
   https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&page=${page}&with_genres=${genresList}`);
-  return response.data;
+  const moviesResponse = response.data.results.slice(0, 16);
+  const pagesResponse =
+    response.data.total_pages > 5
+      ? [0, 1, 2, 3, 4]
+      : response.data.total_pages != 0
+      ? Array.from(Array(response.data.total_pages).keys())
+      : [];
+  return { moviesResponse, pagesResponse };
 }
 export async function getSearchResults(input: String) {
   if (input == " ") return false;

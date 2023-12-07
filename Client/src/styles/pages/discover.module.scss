@@ -108,6 +108,7 @@
     grid-auto-rows: 520px;
     gap: 1rem;
     padding: 1rem;
+    margin-bottom: 2rem;
   }
   .unavailable {
     position: absolute;
@@ -115,5 +116,23 @@
     color: white;
     text-align: center;
     font-family: v.$titleFont;
+  }
+  .pagesHolder {
+    color: white;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    position: absolute;
+    bottom: -2rem;
+    gap: 1rem;
+    font-family: v.$mainFont;
+    > div {
+      border: 1px solid white;
+      width: 3rem;
+      height: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }

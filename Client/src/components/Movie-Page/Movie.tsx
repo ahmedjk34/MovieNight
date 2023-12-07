@@ -22,7 +22,6 @@ function Movie({}: Props) {
   const [recommendations, setRecommendations] = useState<Movie[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const director = getDirector(cast);
-  console.log(director);
   const { id } = useParams();
 
   useEffect(() => {

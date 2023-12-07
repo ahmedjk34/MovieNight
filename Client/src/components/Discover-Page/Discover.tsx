@@ -5,12 +5,14 @@ import LoadingPage from "../LoadingPage";
 import MovieCardVertical from "../MovieCardVertical";
 import styles from "../../styles/pages/discover.module.scss";
 import { VscSettings } from "react-icons/vsc";
+import { v4 } from "uuid";
 
 type Props = {};
 
 function Discover({}: Props) {
   const [isLoading, setIsLoading] = useState(true);
-  const [page, setPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState([0, 1, 2, 3, 4]);
   const [movies, setMovies] = useState<Movie[] | null>(null);
   const [genresList, setGenresList] = useState<Genre[] | null>(null);
   const [filters, setFilters] = useState<Number[]>([]);
@@ -18,11 +20,15 @@ function Discover({}: Props) {
   const genresRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     (async function () {
-      const moviesResponse = await getDiscoverMovies(page, filters);
-      setMovies(moviesResponse.results.slice(0, 16));
+      const { moviesResponse, pagesResponse } = await getDiscoverMovies(
+        currentPage,
+        filters
+      );
+      setTotalPages(pagesResponse);
+      setMovies(moviesResponse);
       setIsLoading(false);
     })();
-  }, [page, applyFilters]);
+  }, [currentPage, applyFilters]);
   useEffect(() => {
     (async function () {
       const genresResponse = await getGenreList();
@@ -113,6 +119,22 @@ function Discover({}: Props) {
               <h1>No movies match these genres</h1>
             </div>
           )}
+          <div className={styles.pagesHolder}>
+            {totalPages.map((i) => (
+              <div
+                onClick={() => {
+                  document.body.scrollTop = 0; // For Safari
+                  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+                  if (currentPage == i + 1) return;
+                  setIsLoading(true);
+                  setCurrentPage(i + 1);
+                }}
+                key={v4()}
+              >
+                {i + 1}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>

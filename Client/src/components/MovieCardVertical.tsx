@@ -37,6 +37,7 @@ function MovieCardVertical({ movie }: Props) {
               ? `https://image.tmdb.org/t/p/original/${movie?.poster_path}`
               : "https://i.ibb.co/zmvS5Dg/New-Project.png"
           }
+          alt={movie?.title}
         ></img>
         <div className={styles.movieInfo}>
           <div className={styles.mainInfo}>

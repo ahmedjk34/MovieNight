@@ -31,6 +31,7 @@ function TrendingMovie({ movie: movie, index: index }: Props) {
         src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
         className={`${styles.backgroundImg} ${!index ? styles.active : ""}`}
         ref={backgroundImg}
+        alt={movie?.title}
       ></img>
       <MovieCardVertical movie={movie}></MovieCardVertical>
     </div>

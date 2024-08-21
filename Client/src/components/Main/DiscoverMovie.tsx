@@ -29,6 +29,7 @@ function DiscoverMovie({
     >
       <img
         src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
+        alt={movie?.title}
       ></img>
       <div>{movie.title}</div>
     </div>

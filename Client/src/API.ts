@@ -27,7 +27,7 @@ export async function getTrailer(id: number): Promise<Boolean | String> {
   const response = await axios.get(
     `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`
   );
-  if (response.data == []) return false;
+  if (!response.data.length) return false;
   //@ts-ignore
   const trailerObject = response.data.results.filter(
     ({ type }: { type: string }) => type == "Teaser" || type == "Trailer"

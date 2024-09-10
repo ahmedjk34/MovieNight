@@ -1,22 +1,5 @@
 @use "../variables/variables" as v;
 @use "../mixins/mixins" as m;
-//Animations
-
-@keyframes hoverMovie {
-  from {
-    transform: translateY(0%) skew(20deg);
-    opacity: 0;
-    visibility: visible;
-  }
-  50% {
-    transform: translateY(10%) scale(1.05);
-  }
-  to {
-    transform: translateY(0%) skew(0);
-    opacity: 1;
-    visibility: visible;
-  }
-}
 
 .main {
   @include m.title;
@@ -94,9 +77,9 @@
           background: rgb(0, 0, 0);
           background: linear-gradient(
             0deg,
-            rgba(0, 0, 0, 1) 0%,
-            rgba(0, 0, 0, 0.7) 80%,
-            rgba(0, 0, 0, 0.4) 100%
+            rgba(0, 0, 0, 0.2) 0%,
+            rgba(0, 0, 0, 0.5) 50%,
+            rgba(0, 0, 0, 1) 100%
           );
           font-family: v.$mainFont;
           height: clamp(3.2rem, 17%, 6.1rem);

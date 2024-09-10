@@ -3,15 +3,16 @@
 //Animations
 @keyframes hoverMovie {
   from {
-    transform: translateY(0%) skew(20deg);
+    transform: translateY(0%);
     opacity: 0;
     visibility: visible;
   }
-  50% {
-    transform: translateY(10%) scale(1.05);
+  40% {
+    transform: translateY(-7.5%) scale(1.02);
   }
+
   to {
-    transform: translateY(0%) skew(0);
+    transform: translateY(0%) scale(1);
     opacity: 1;
     visibility: visible;
   }
